@@ -1,49 +1,39 @@
+import Directory from './directory/directory.component'
+
 
 function App() {
 
   const categories = [
     {
       id: 1,
-      name: 'Hats'
+      title: 'hats',
+      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
     },
     {
       id: 2,
-      name: 'Gloves'
+      title: 'jackets',
+      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
     },
     {
       id: 3,
-      name: 'Things'
+      title: 'sneakers',
+      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
     },
     {
       id: 4,
-      name: 'Pants'
+      title: 'womens',
+      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
     },
     {
       id: 5,
-      name: 'Shirts'
+      title: 'mens',
+      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
     }
   ]
 
-  return (
-    <div className='categories-container'>
-
-    {/* Using brackets here instead of curleys in this react map */}
-      {  categories.map( ( { title } ) => (
-          <div className='category-container'>
-            jfjfj
-            {/* <img /> */}
-            <div className='category-body-container'>
-              <h2>{title}</h2>
-              <p>Shop Now</p>
-            </div>
-          </div>
-      ))
-      }
-
-    </div>
-
-
-  );
+ return (
+    <Directory categories={categories} />
+ )
 }
 
 export default App;
