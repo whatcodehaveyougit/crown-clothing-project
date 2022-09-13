@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import FormInput from '../form-input/form-input.component'
-import './sign-up-form.styles.scss'
+import './sign-up.styles.scss'
 import Button from '../button/button.componet'
 import { 
     createAuthUserWithEmailAndPassword,
@@ -16,7 +16,7 @@ const defaultFormFields = {
   };
 
   
-const SignUpForm = () => {
+const SignUp = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
@@ -99,10 +99,10 @@ const SignUpForm = () => {
                 <Button
                     type="submit"
                     // buttonType="google"
-                ></Button>
+                >Sign up</Button>
             </form>
         </div>
     )
 }
 
-export default SignUpForm;
+export default SignUp;

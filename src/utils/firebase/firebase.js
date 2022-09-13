@@ -5,7 +5,7 @@ import {
     signInWithPopup, 
     signInWithEmailAndPassword,
     GoogleAuthProvider,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
 import { useDebugValue } from 'react';
@@ -78,9 +78,17 @@ const firebaseConfig = {
 
     if ( !email || !password ) return;
     // const createdAt = new Date;
-
     const auth = getAuth()
-
     return await createUserWithEmailAndPassword( auth, email, password );
+
+  }
+
+
+  export const signInAuthUserWithEmailAndPassword = async ( email, password ) => {
+
+    if ( !email || !password ) return;
+    // const createdAt = new Date;
+    const auth = getAuth()
+    return await signInWithEmailAndPassword( auth, email, password );
 
   }
