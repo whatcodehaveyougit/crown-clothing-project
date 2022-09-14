@@ -15,27 +15,23 @@ const defaultFormFields = {
     password: '',
   };
 
-  
 const SignIn = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
     const signInWithGoogle = async () => {
-        const {user} = await signInWithGooglePopup();
+        await signInWithGooglePopup();
         // We should always get one back now whether the user has just been created before or not. 
-        await createUserDocumentFromAuth( user )
     }
-
-    // console.log( formFields );
-
 
     const handleSubmit = async ( event ) => {
         event.preventDefault();
         
         try {
-            const response = await signInAuthUserWithEmailAndPassword(email, password);
-            console.log(response)
+            const { user } = await signInAuthUserWithEmailAndPassword(email, password);
+            // console.log(response)
+            // setCurrentUse r( user );
             resetFormFields();
         } catch ( error ) {
 

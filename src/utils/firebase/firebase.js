@@ -6,6 +6,8 @@ import {
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
 import { useDebugValue } from 'react';
@@ -21,9 +23,7 @@ const firebaseConfig = {
     appId: "1:949498107088:web:956712b00970164524fad5"
   };
   
-  
   // Initialize Firebase
-  
   const app = initializeApp(firebaseConfig);
 
 //   GoogleAuthProvider is a class we get from firebase.
@@ -50,12 +50,15 @@ const firebaseConfig = {
     const userDocRef = doc( db, 'users', userAuth.uid)
 
     // A snapshot allows us to check whether an instance of this already exists in DB
+    // Digs into that place in the DB with the UID we get from userAuth
+    // Then that will determine if the user exists or not. 
     const userSnapshot = await getDoc( userDocRef );
 
     // console.log( userSnapshot.exists )
 
     if (!userSnapshot.exists) {
-        console.log('user does not exist');
+
+        // console.log('User exist pas, creating new entry in DB..');
         const { displayName, email } = userAuth;
         const createdAt = new Date;
         try {
@@ -92,3 +95,7 @@ const firebaseConfig = {
     return await signInWithEmailAndPassword( auth, email, password );
 
   }
+
+  export const signOutUser = () => signOut(auth);
+
+  export const onAuthStateChangedListener = ( callback ) => onAuthStateChanged( auth, callback);
