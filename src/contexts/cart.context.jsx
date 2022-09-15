@@ -23,7 +23,8 @@ export const CartContext = createContext({
     isCartOpen: false,
     setIsCartOpen: () => {},
     cartItems: [],
-    cartCount: 0
+    cartCount: 0,
+    cartTotal: 0
 });
 
 // Not exactly sure what the children does......
@@ -32,10 +33,15 @@ export const CartProvider = ({ children }) => {
     const [ isCartOpen, setIsCartOpen ] = useState( false );
     const [ cartItems, setCartItems ] = useState([]);
     const [ cartCount, setCartCount ] = useState(0);
+    const [ cartTotal, setCartTotal ] = useState(0);
 
     useEffect(() => {
         const totalQuantity  = cartItems.reduce( ( accumulator, currentElement ) => accumulator + currentElement.quantity , 0 )
         setCartCount( totalQuantity )
+
+        const cartTotalPrice  = cartItems.reduce( ( accumulator, currentElement ) => accumulator + currentElement.price , 0 )
+        console.log(cartTotalPrice);
+        setCartTotal( cartTotalPrice );
     }, [cartItems])
 
     // This will be triggered every time the user clicks AddToCart
@@ -44,7 +50,7 @@ export const CartProvider = ({ children }) => {
     }
 
     // ============ This is where things are actually added to the context ============= //
-    const value = { cartCount, isCartOpen, setIsCartOpen, addItemToCart, cartItems };
+    const value = { cartTotal, cartCount, isCartOpen, setIsCartOpen, addItemToCart, cartItems };
 
     return (
         <CartContext.Provider value={value}>{children}</CartContext.Provider>
