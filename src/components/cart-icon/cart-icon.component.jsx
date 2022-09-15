@@ -5,17 +5,15 @@ import { useContext } from 'react'
 
 const CartIcon = () => {
 
-    const { cartItems, isCartOpen, setIsCartOpen }  = useContext( CartContext );
+    const { cartCount, isCartOpen, setIsCartOpen }  = useContext( CartContext );
 
     const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);  
-
-    const totalQuantity  = cartItems.reduce( ( accumulator, currentElement ) => accumulator + currentElement.quantity , 0 )
  
     return (
-        <div className='cart-icon-container' onClick={toggleIsCartOpen} > 
+        <div className='cart-icon-container' onClick={toggleIsCartOpen} >
             <ShoppingIcon className='shopping-icon' />
             <span className='item-count'>
-                {totalQuantity}
+                {cartCount}
             </span>
         </div>
     )
