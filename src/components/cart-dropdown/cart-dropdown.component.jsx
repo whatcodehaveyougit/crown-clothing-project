@@ -8,7 +8,6 @@ import './cart-dropdown.styles.scss';
 
 const CartDropdown = () => {
   const { cartItems } = useContext(CartContext);
-  console.log( 'cartItems' + cartItems );
 
   return (
     <div className='cart-dropdown-container'>

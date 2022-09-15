@@ -50,12 +50,22 @@ export const CartProvider = ({ children }) => {
         setCartItems( addCartItem( cartItems, productToAdd ) )
     }
 
-    const clearItemFromCart = ( cartItem ) => {
-        console.log( 'clearing item from cart ')
+    const clearItemFromCart = ( itemToClearFromBasket ) => {
+        let updatedCartItems = []
+        cartItems.forEach( (cartItem) => {
+            if ( cartItem.id != itemToClearFromBasket.id ) {
+                updatedCartItems.push(cartItem);
+            }
+            setCartItems( updatedCartItems )    
+        })
+      
     } 
 
-    const removeItemToCart = ( cartItem ) => {
-        console.log( 'removing Item item from cart ')
+    const removeItemToCart = ( productToTakeOffOne ) => {
+        const updatedCartItems =  cartItems.map( (cartItem) => 
+            cartItem.id === productToTakeOffOne.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+        )
+        setCartItems( updatedCartItems )
     } 
 
     // ============ This is where things are actually added to the context ============= //
