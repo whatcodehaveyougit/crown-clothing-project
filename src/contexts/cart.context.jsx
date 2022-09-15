@@ -36,11 +36,12 @@ export const CartProvider = ({ children }) => {
     const [ cartTotal, setCartTotal ] = useState(0);
 
     useEffect(() => {
+        console.log('cart items changed')
         const totalQuantity  = cartItems.reduce( ( accumulator, currentElement ) => accumulator + currentElement.quantity , 0 )
         setCartCount( totalQuantity )
 
-        const cartTotalPrice  = cartItems.reduce( ( accumulator, currentElement ) => accumulator + currentElement.price , 0 )
-        console.log(cartTotalPrice);
+        const cartTotalPrice  = cartItems.reduce( ( accumulator, currentElement ) =>
+        accumulator + currentElement.price * currentElement.quantity , 0 )
         setCartTotal( cartTotalPrice );
     }, [cartItems])
 
@@ -49,8 +50,25 @@ export const CartProvider = ({ children }) => {
         setCartItems( addCartItem( cartItems, productToAdd ) )
     }
 
+    const clearItemFromCart = ( cartItem ) => {
+        console.log( 'clearing item from cart ')
+    } 
+
+    const removeItemToCart = ( cartItem ) => {
+        console.log( 'removing Item item from cart ')
+    } 
+
     // ============ This is where things are actually added to the context ============= //
-    const value = { cartTotal, cartCount, isCartOpen, setIsCartOpen, addItemToCart, cartItems };
+    const value = { 
+        cartTotal, 
+        cartCount, 
+        isCartOpen, 
+        setIsCartOpen, 
+        cartItems,
+        clearItemFromCart,
+        addItemToCart,
+        removeItemToCart
+    };
 
     return (
         <CartContext.Provider value={value}>{children}</CartContext.Provider>
