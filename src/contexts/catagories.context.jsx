@@ -3,12 +3,12 @@ import SHOP_DATA from '../shop-data';
 import { addCollectionAndDocuments, getCatagoriesAndDocuments } from "../utils/firebase/firebase.js";
 
 // The value I want to access
-export const ProductsContext = createContext({
-    products: [],
+export const CatagoriesContext = createContext({
+    catagoriesMap: {},
 });
 
-export const ProductsProvider = ({ children }) => {
-    const [ products, setProducts ] = useState( [] );
+export const CatagoriesProvider = ({ children }) => {
+    const [ catagoriesMap, setCatagoriesMap ] = useState( {} );
 
     // This got all the data into the Firestore DB.  Although I could not get the SHOP_DATA js import to work. 
     // useEffect( () => {
@@ -21,15 +21,15 @@ export const ProductsProvider = ({ children }) => {
         // When using an async funcion inside of useEffect, don't make the useEffect async, create a new function inside.
         const getCatagoriesMap = async () => {
             const catagoryMap = await getCatagoriesAndDocuments();
-            console.log( catagoryMap );
+            setCatagoriesMap(catagoryMap)
         }
         getCatagoriesMap();
     }, [])
 
-    const value = { products };
+    const value = { catagoriesMap };
 
 
     return (
-        <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>
+        <CatagoriesContext.Provider value={value}>{children}</CatagoriesContext.Provider>
     )
 }
