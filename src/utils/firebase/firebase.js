@@ -9,7 +9,16 @@ import {
     signOut,
     onAuthStateChanged
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
+import { 
+  getFirestore, 
+  doc, 
+  getDoc, 
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs
+} from 'firebase/firestore'
 import { useDebugValue } from 'react';
 
 // Your web app's Firebase configuration
@@ -38,6 +47,37 @@ const firebaseConfig = {
   export const signInWithEmailAndPasswordNormal = () => signInWithEmailAndPassword( auth )
 
   export const db = getFirestore();
+
+  export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+
+    const collectionRef = collection( db, collectionKey);
+    // We write multiple different documents (which are objects at the start) into a collection
+    const batch = writeBatch(db);
+
+    console.log( objectsToAdd );
+
+    objectsToAdd.forEach((object) => {
+      // The collectionRef tells the docRef which DB we are using
+      const docRef = doc(collectionRef, object.title.toLowerCase() );
+      batch.set(docRef, object);
+      
+    })
+    await batch.commit();
+    console.log('done');
+  }
+
+  export const getCatagoriesAndDocuments = async () => {
+    const collectionRef = collection( db, 'catagories');
+    const q = query( collectionRef );
+
+    const querySnapshot = await getDocs(q);
+    const catagoryMap = querySnapshot.docs.reduce(( acc, docSnapshot) => {
+      const { title, items } = docSnapshot.data();
+      acc[title.toLowerCase()] = items;
+      return acc;
+    }, {})
+    return catagoryMap;
+  }
 
   export const createUserDocumentFromAuth = async ( 
     userAuth, 

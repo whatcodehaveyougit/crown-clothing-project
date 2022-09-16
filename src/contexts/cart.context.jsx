@@ -13,15 +13,34 @@ const addCartItem = (cartItems, productToAdd) => {
             cartItem.id === productToAddInBasket.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
         )
     }
-
     // Return new array of objects with original cart items + the new cart item (spread in with a default quantity of 1)
     return [ ...cartItems, {...productToAdd, quantity: 1 }]
+}
+
+const removeCartItem = ( cartItems, productToTakeOffOne ) => {
+    // Check if the quantity is equal to 1, if it is, then remove from basket. 
+    const updatedCartItems =  cartItems.map( (cartItem) => 
+        cartItem.id === productToTakeOffOne.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+    )
+    return updatedCartItems; 
+}
+
+const clearCartItem = ( cartItems, itemToClearFromCart ) => {
+    let updatedCartItems = [];
+    cartItems.forEach( (cartItem) => {
+        if ( cartItem.id != itemToClearFromCart.id ) {
+            updatedCartItems.push(cartItem);
+        }
+    })
+    return updatedCartItems;
 }
 
 // The value I want to access
 export const CartContext = createContext({
     isCartOpen: false,
     setIsCartOpen: () => {},
+    // removeItemToCart: () => {},
+    // addItemToCart: () => {},
     cartItems: [],
     cartCount: 0,
     cartTotal: 0
@@ -39,7 +58,10 @@ export const CartProvider = ({ children }) => {
         console.log('cart items changed')
         const totalQuantity  = cartItems.reduce( ( accumulator, currentElement ) => accumulator + currentElement.quantity , 0 )
         setCartCount( totalQuantity )
+    }, [cartItems])
 
+    // Single responsability UseEffects() - Good Practice
+    useEffect(() => {
         const cartTotalPrice  = cartItems.reduce( ( accumulator, currentElement ) =>
         accumulator + currentElement.price * currentElement.quantity , 0 )
         setCartTotal( cartTotalPrice );
@@ -50,22 +72,12 @@ export const CartProvider = ({ children }) => {
         setCartItems( addCartItem( cartItems, productToAdd ) )
     }
 
-    const clearItemFromCart = ( itemToClearFromBasket ) => {
-        let updatedCartItems = []
-        cartItems.forEach( (cartItem) => {
-            if ( cartItem.id != itemToClearFromBasket.id ) {
-                updatedCartItems.push(cartItem);
-            }
-            setCartItems( updatedCartItems )    
-        })
-      
+    const clearItemFromCart = ( itemToClearFromCart ) => {
+        setCartItems( clearCartItem( cartItems, itemToClearFromCart ) )    
     } 
 
     const removeItemToCart = ( productToTakeOffOne ) => {
-        const updatedCartItems =  cartItems.map( (cartItem) => 
-            cartItem.id === productToTakeOffOne.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
-        )
-        setCartItems( updatedCartItems )
+        setCartItems( removeCartItem( cartItems, productToTakeOffOne) )
     } 
 
     // ============ This is where things are actually added to the context ============= //
