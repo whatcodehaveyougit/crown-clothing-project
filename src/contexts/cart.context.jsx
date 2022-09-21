@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import { createContext, useState } from "react";
 
 const addCartItem = (cartItems, productToAdd) => {
-
     // Find if cart contains product to add
     const productToAddInBasket = cartItems.find(( cartItem ) => cartItem.id == productToAdd.id )
-
     // If found increment quantity - return a brand new array
     if ( productToAddInBasket ) {
         // NB - Map without curleys.......
