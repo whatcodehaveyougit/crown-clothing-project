@@ -8,10 +8,10 @@ const Catagory = () => {
 
     const { catagory } = useParams();
     const { catagoriesMap } = useContext(CatagoriesContext);
-    const [ products, setProducts ] = useState([]);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        setProducts( catagoriesMap[catagory] );
+        setProducts(catagoriesMap[catagory]);
 
     }, [catagory, catagoriesMap])
 
@@ -20,7 +20,6 @@ const Catagory = () => {
             {
                 products.map((product) => {
                     <ProductCard key={product.id} product={product}></ProductCard>
-
                 })
             }
         </div>
