@@ -20,9 +20,10 @@ const SignUp = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (password != confirmPassword) return;
-
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
@@ -30,7 +31,6 @@ const SignUp = () => {
       );
       await createUserDocumentFromAuth(user, { displayName });
       // setCurrentUser( user );
-
       resetFormFields();
     } catch (error) {
       if (error.code == "auth/email-already-in-use") {
@@ -38,7 +38,6 @@ const SignUp = () => {
       }
       console.log("error in creating user" + error);
     }
-
     // We should always get one back now whether the user has just been created before or not.
   };
 
@@ -49,7 +48,6 @@ const SignUp = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
-    console.log("hello");
   };
 
   return (
@@ -65,7 +63,6 @@ const SignUp = () => {
           name="displayName"
           value={displayName}
         />
-
         <FormInput
           label="Email"
           type="email"
@@ -74,7 +71,6 @@ const SignUp = () => {
           name="email"
           value={email}
         />
-
         <FormInput
           label="Password"
           type="password"
@@ -83,7 +79,6 @@ const SignUp = () => {
           name="password"
           value={password}
         />
-
         <FormInput
           label="Confirm Password"
           type="password"
@@ -92,12 +87,7 @@ const SignUp = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <Button
-          type="submit"
-          // buttonType="google"
-        >
-          Sign up
-        </Button>
+        <Button type="submit">Sign up</Button>
       </form>
     </div>
   );

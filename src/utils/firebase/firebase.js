@@ -53,8 +53,7 @@ const firebaseConfig = {
     const collectionRef = collection( db, collectionKey);
     // We write multiple different documents (which are objects at the start) into a collection
     const batch = writeBatch(db);
-
-    console.log( objectsToAdd );
+    // console.log( objectsToAdd );
 
     objectsToAdd.forEach((object) => {
       // The collectionRef tells the docRef which DB we are using
@@ -84,13 +83,15 @@ const firebaseConfig = {
   export const createUserDocumentFromAuth = async (
     userAuth,
     additionalInfo = {  }
+    // When using sign-up-form component we won't get display name back
+    // So we pass it in manually and spread it into the setDoc()
     ) => {
 
-    if ( !userAuth ) return;
 
+
+    if ( !userAuth ) return;
     // users is a reference to our collections
     const userDocRef = doc( db, 'users', userAuth.uid)
-
     // A snapshot allows us to check whether an instance of this already exists in DB
     // Digs into that place in the DB with the UID we get from userAuth
     // Then that will determine if the user exists or not.
@@ -99,8 +100,7 @@ const firebaseConfig = {
     // If User does not already exist - create a user
     // If a User does exist - return it to me
     if (!userSnapshot.exists) {
-
-        console.log('User exist pas, creating new entry in DB..');
+        // console.log('User exist pas, creating new entry in DB..');
         const { displayName, email } = userAuth;
         const createdAt = new Date();
         try {
@@ -119,23 +119,18 @@ const firebaseConfig = {
   }
 
 
+  // Naming this function the same as the real FireBase method used to interact with the API
+  // Gives a layer inbetween our front-end code and our interactions with Firebase
   export const createAuthUserWithEmailAndPassword = async ( email, password ) => {
-
     if ( !email || !password ) return;
-    // const createdAt = new Date;
     const auth = getAuth()
     return await createUserWithEmailAndPassword( auth, email, password );
-
   }
 
-
   export const signInAuthUserWithEmailAndPassword = async ( email, password ) => {
-
     if ( !email || !password ) return;
-    // const createdAt = new Date;
     const auth = getAuth()
     return await signInWithEmailAndPassword( auth, email, password );
-
   }
 
   export const signOutUser = () => signOut(auth);
