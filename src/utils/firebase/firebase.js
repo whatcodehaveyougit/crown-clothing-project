@@ -48,6 +48,7 @@ const firebaseConfig = {
 
   export const db = getFirestore(); // once we have instantiated Firestore we can use it to acces our DB
 
+  // The function used to write JSON to the Firebase DB
   export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
 
     const collectionRef = collection( db, collectionKey);
@@ -87,8 +88,6 @@ const firebaseConfig = {
     // So we pass it in manually and spread it into the setDoc()
     ) => {
 
-
-
     if ( !userAuth ) return;
     // users is a reference to our collections
     const userDocRef = doc( db, 'users', userAuth.uid)
@@ -114,7 +113,6 @@ const firebaseConfig = {
             console.log( 'error creating user' + error );
         }
     }
-    console.log('user does exist');
     return userDocRef;
   }
 
@@ -133,6 +131,6 @@ const firebaseConfig = {
     return await signInWithEmailAndPassword( auth, email, password );
   }
 
-  export const signOutUser = () => signOut(auth);
+  export const signOutUser = async () => await signOut(auth);
 
   export const onAuthStateChangedListener = ( callback ) => onAuthStateChanged( auth, callback);

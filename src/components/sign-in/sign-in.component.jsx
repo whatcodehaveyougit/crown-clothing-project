@@ -3,8 +3,6 @@ import FormInput from "../form-input/form-input.component";
 import "./sign-in.styles.scss";
 import Button from "../button/button.componet";
 import {
-  createAuthUserWithEmailAndPassword,
-  signInWithEmailAndPasswordNormal,
   signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
@@ -20,9 +18,7 @@ const SignIn = () => {
   const { email, password } = formFields;
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    const res = await createUserDocumentFromAuth(user);
-    console.log(res);
+    await signInWithGooglePopup();
     // We should always get one back now whether the user has just been created before or not.
   };
 
@@ -34,8 +30,7 @@ const SignIn = () => {
         email,
         password
       );
-      //   console.log(response);
-      //   setCurrentUser(user);
+      // currentUser is set in UserContext, see UserContext for how
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -52,6 +47,7 @@ const SignIn = () => {
 
     // We should always get one back now whether the user has just been created before or not.
   };
+  console.log("sign in");
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -85,18 +81,13 @@ const SignIn = () => {
           value={password}
         />
         <div className="buttons-container">
-          <Button
-            type="submit"
-            // buttonType="google"
-          >
-            Sign in
-          </Button>
+          <Button type="submit">Sign in</Button>
           <Button
             buttonType="google"
             type="button" // This stops the form from submitting when we press the button
             onClick={signInWithGoogle}
           >
-            Sign in with Google Popup
+            Google Popup SignIn
           </Button>
         </div>
       </form>
