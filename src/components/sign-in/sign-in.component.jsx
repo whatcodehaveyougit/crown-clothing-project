@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import "./sign-in.styles.scss";
-import Button from "../button/button.componet";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.componet";
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
@@ -83,7 +83,7 @@ const SignIn = () => {
         <div className="buttons-container">
           <Button type="submit">Sign in</Button>
           <Button
-            buttonType="google"
+            buttonType={BUTTON_TYPE_CLASSES.google}
             type="button" // This stops the form from submitting when we press the button
             onClick={signInWithGoogle}
           >

@@ -5,7 +5,12 @@ import { UserContext } from "../../contexts/user.contexts";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
-import { NavigationContainer, LogoContainer } from "./navigation.styles.jsx";
+import {
+  NavigationContainer,
+  LogoContainer,
+  NavLinks,
+  NavLink,
+} from "./navigation.styles.jsx";
 import { CartContext } from "../../contexts/cart.context";
 
 const Navigation = () => {
@@ -19,24 +24,18 @@ const Navigation = () => {
         <LogoContainer to="/">
           <CrwnLogo className="logo" />
         </LogoContainer>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            SHOP
-          </Link>
-          <Link className="nav-link" to="/checkout">
-            CHECKOUT
-          </Link>
+        <NavLinks>
+          <NavLink to="/shop">SHOP</NavLink>
+          <NavLink to="/checkout">CHECKOUT</NavLink>
           {currentUser ? (
             <span className="nav-link" onClick={signOutUser}>
               Sign Out
             </span>
           ) : (
-            <Link className="nav-link" to="/auth">
-              Sign in
-            </Link>
+            <NavLink to="/auth">Sign in</NavLink>
           )}
           <CartIcon />
-        </div>
+        </NavLinks>
         {isCartOpen && <CartDropdown />}
       </NavigationContainer>
       <Outlet />
