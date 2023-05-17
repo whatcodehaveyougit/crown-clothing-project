@@ -44,7 +44,6 @@ const SignIn = () => {
           console.log(error);
       }
     }
-
     // We should always get one back now whether the user has just been created before or not.
   };
   console.log("sign in");
