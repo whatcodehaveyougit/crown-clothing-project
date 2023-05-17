@@ -13,6 +13,7 @@ import {
 } from "./navigation.styles.jsx";
 import { CartContext } from "../../contexts/cart.context";
 
+console.log("test");
 const Navigation = () => {
   // Whenever a value inside of this context updates, the functional component is re-rendered
   const { currentUser } = useContext(UserContext);
