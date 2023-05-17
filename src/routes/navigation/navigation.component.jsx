@@ -1,5 +1,5 @@
 import { Fragment, useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { UserContext } from "../../contexts/user.contexts";
 import { signOutUser } from "../../utils/firebase/firebase";
@@ -13,7 +13,6 @@ import {
 } from "./navigation.styles.jsx";
 import { CartContext } from "../../contexts/cart.context";
 
-console.log("test");
 const Navigation = () => {
   // Whenever a value inside of this context updates, the functional component is re-rendered
   const { currentUser } = useContext(UserContext);

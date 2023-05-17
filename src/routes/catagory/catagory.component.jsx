@@ -1,4 +1,4 @@
-import "./catagory.styles.scss";
+import { CatagoryContainer } from "./catagory.styles.jsx";
 import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { CatagoriesContext } from "../../contexts/catagories.context";
@@ -13,14 +13,13 @@ const Catagory = () => {
     setProducts(catagoriesMap[catagory]);
   }, [catagory, catagoriesMap]);
 
-  console.log(products);
   return (
-    <div className="catagory-container">
+    <CatagoryContainer>
       {products &&
         products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-    </div>
+    </CatagoryContainer>
   );
 };
 
