@@ -74,12 +74,12 @@ export const getCatagoriesAndDocuments = async () => {
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const catagoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
     const { title, items } = docSnapshot.data();
     acc[title.toLowerCase()] = items;
     return acc;
   }, {});
-  return catagoryMap;
+  return categoryMap;
 };
 
 // This function takes the data we get from Auth Service

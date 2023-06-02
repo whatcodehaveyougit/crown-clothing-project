@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import ProductCard from "../product-card/product-card.component";
-import "./catagory-preview.styles.scss";
+import "./category-preview.styles.scss";
 
-const CatagoryPreview = ({ title, products }) => {
+const CategoryPreview = ({ title, products }) => {
   return (
     <div className="category-preview-container">
       <h2>
@@ -22,4 +22,4 @@ const CatagoryPreview = ({ title, products }) => {
   );
 };
 
-export default CatagoryPreview;
+export default CategoryPreview;
