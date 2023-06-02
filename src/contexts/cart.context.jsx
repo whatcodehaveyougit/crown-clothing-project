@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { createContext, useState, useReducer } from "react";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 // The value I want to access
 export const CartContext = createContext({
@@ -82,11 +82,12 @@ const INITIAL_STATE = {
 };
 
 export const CartProvider = ({ children }) => {
+  // Here we are getting back the state & are destructuring it directly
   const [{ cartTotal, isCartOpen, cartItems, cartCount }, dispatch] =
     useReducer(cartReducer, INITIAL_STATE);
 
   const setIsCartOpen = (isCartOpen) => {
-    dispatch({ type: CART_ACTION_TYPES.SET_IS_CART_OPEN, payload: isCartOpen });
+    dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isCartOpen));
   };
 
   const updateCartItemsReducer = (newCartItems) => {
@@ -99,14 +100,13 @@ export const CartProvider = ({ children }) => {
         accumulator + currentElement.price * currentElement.quantity,
       0
     );
-    dispatch({
-      type: "SET_CART_ITEMS",
-      payload: {
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
         cartCount: newCartCount,
         cartTotal: newCartTotal,
         cartItems: newCartItems,
-      },
-    });
+      })
+    );
   };
 
   // This will be triggered every time the user clicks AddToCart

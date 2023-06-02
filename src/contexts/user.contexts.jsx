@@ -3,6 +3,7 @@ import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
 } from "../utils/firebase/firebase";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 // The actual value I want to access
 export const UserContext = createContext({
@@ -38,24 +39,10 @@ export const UserProvider = ({ children }) => {
   // { currentUser } this is the state which we are destructuring.
 
   const setCurrentUser = (user) => {
-    dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
+    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
   };
 
   const value = { currentUser, setCurrentUser };
-
-  // Centralising control of setting user, best here rather than on sign in/out component
-  useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener(async (user) => {
-      if (user) {
-        // This in theory creates the document in the Firebas DB (although no working atm)
-        await createUserDocumentFromAuth(user);
-      }
-      // current user will be null if nobody is signed in
-      // current user will be the object if someone is signed in
-      setCurrentUser(user);
-    });
-    return unsubscribe;
-  }, []);
 
   return (
     <UserContext.Provider value={value}> {children} </UserContext.Provider>

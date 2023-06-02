@@ -1,7 +1,7 @@
 import { Fragment, useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
-import { UserContext } from "../../contexts/user.contexts";
+// import { UserContext } from "../../contexts/user.contexts";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -15,7 +15,7 @@ import { CartContext } from "../../contexts/cart.context";
 
 const Navigation = () => {
   // Whenever a value inside of this context updates, the functional component is re-rendered
-  const { currentUser } = useContext(UserContext);
+  // const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
 
   return (
@@ -27,7 +27,7 @@ const Navigation = () => {
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
           <NavLink to="/checkout">CHECKOUT</NavLink>
-          {currentUser ? (
+          {true === true ? (
             <span className="nav-link" onClick={signOutUser}>
               Sign Out
             </span>
