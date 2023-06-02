@@ -24,10 +24,9 @@ const App = () => {
       }
       // current user will be null if nobody is signed in
       // current user will be the object if someone is signed in
-      console.log(user);
+
       // setCurrentUser is creating an ACTION object for us
       // The dispath function to root reducer, which passes the action to every single reducer..!
-      console.log(setCurrentUser(user));
       dispatch(setCurrentUser(user));
     });
     return unsubscribe;

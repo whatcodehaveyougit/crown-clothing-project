@@ -6,7 +6,6 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase";
-import { UserContext } from "../../contexts/user.contexts";
 
 const defaultFormFields = {
   displayName: "",
