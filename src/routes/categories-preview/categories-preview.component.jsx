@@ -1,21 +1,19 @@
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 import { useSelector } from "react-redux";
-import { selectCategoriesMap } from "../../store/categories/category.selector.js";
+import { selectCategories } from "../../store/categories/category.selector.js";
 
 const CategoriesPreview = () => {
-  const catagoriesMap = useSelector(selectCategoriesMap);
-  console.log(catagoriesMap + "hellooo");
+  const catagories = useSelector(selectCategories);
   return (
     <>
       {
-        catagoriesMap &&
-          Object.keys(catagoriesMap).map((title) => {
-            const products = catagoriesMap[title];
+        catagories &&
+          Object.keys(catagories).map((title) => {
+            const products = catagories[title];
             return (
               <CategoryPreview id={title} title={title} products={products} />
             );
           })
-
         // If you want the map to implicitly return something - use normal brakets instead of squiggley
       }
     </>

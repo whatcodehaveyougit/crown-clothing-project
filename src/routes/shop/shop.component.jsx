@@ -4,7 +4,7 @@ import Category from "../category/category.component.jsx";
 import "./shop.styles.scss";
 import { getCatagoriesAndDocuments } from "../../utils/firebase/firebase.js";
 import { useEffect } from "react";
-import { setCategoriesMap } from "../../store/categories/category.action.js";
+import { setCategories } from "../../store/categories/category.action.js";
 import { useDispatch } from "react-redux";
 
 const Shop = () => {
@@ -12,8 +12,8 @@ const Shop = () => {
   useEffect(() => {
     // When using an async funcion inside of useEffect, don't make the useEffect async, create a new function inside.
     const getCategoriesMap = async () => {
-      const categoryMap = await getCatagoriesAndDocuments();
-      dispatch(setCategoriesMap(categoryMap));
+      const categoriesArray = await getCatagoriesAndDocuments();
+      dispatch(setCategories(categoriesArray));
     };
     getCategoriesMap();
     // and then call the async function!
