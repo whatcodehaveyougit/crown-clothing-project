@@ -13,6 +13,10 @@ const Shop = () => {
     // When using an async funcion inside of useEffect, don't make the useEffect async, create a new function inside.
     const getCategoriesMap = async () => {
       const categoriesArray = await getCatagoriesAndDocuments();
+
+      // setCategories is a helperFunction
+      // it takes in the categoriesArray & then has the logic inside to dispatch the actions with all the
+      // correct info, the object, the params of the action TYPE & payload. Voila.
       dispatch(setCategories(categoriesArray));
     };
     getCategoriesMap();
