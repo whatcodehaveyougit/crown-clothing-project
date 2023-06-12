@@ -6,8 +6,6 @@ const INITIAL_STATE = {
 
 // Our reducers in redux recieve every single action that is getting dispatched
 export const userReducer = (state = INITIAL_STATE, action) => {
-  console.log(action);
-
   const { type, payload } = action;
 
   switch (type) {
