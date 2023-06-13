@@ -120,7 +120,7 @@ export const CartProvider = ({ children }) => {
     updateCartItemsReducer(newCartItems);
   };
 
-  const removeItemToCart = (productToTakeOffOne) => {
+  const removeItemFromCart = (productToTakeOffOne) => {
     const newCartItems = removeCartItem(cartItems, productToTakeOffOne);
     updateCartItemsReducer(newCartItems);
   };
@@ -134,7 +134,7 @@ export const CartProvider = ({ children }) => {
     cartItems,
     clearItemFromCart,
     addItemToCart,
-    removeItemToCart,
+    removeItemFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

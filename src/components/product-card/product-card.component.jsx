@@ -1,7 +1,7 @@
 import "./product-card.styles.scss";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.componet";
 import { addItemToCart } from "../../store/cart/cart.action";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector";
 
 const ProductCard = ({ product }) => {
@@ -9,9 +9,8 @@ const ProductCard = ({ product }) => {
 
   // This is not plugging in properly.
   const cartItems = useSelector(selectCartItems);
-  console.log(cartItems);
-
-  const addProductToCart = () => addItemToCart(cartItems, product);
+  const dispatch = useDispatch();
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
 
   return (
     <div className="product-card-container">

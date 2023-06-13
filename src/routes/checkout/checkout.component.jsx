@@ -3,7 +3,6 @@ import {
   selectCartTotal,
   selectCartItems,
 } from "../../store/cart/cart.selector";
-
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import {
   CheckoutContainer,
@@ -13,8 +12,10 @@ import {
 } from "./checkout.styles.jsx";
 
 const Checkout = () => {
-  const { cartItems } = useSelector(selectCartItems);
-  const { cartTotal } = useSelector(selectCartTotal);
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
+
+  console.log(cartItems);
 
   return (
     <CheckoutContainer>

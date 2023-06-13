@@ -16,9 +16,6 @@ import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 const Navigation = () => {
   const isCartOpen = useSelector(selectIsCartOpen);
-
-  console.log(isCartOpen);
-
   const currentUser = useSelector(selectCurrentUser);
 
   return (

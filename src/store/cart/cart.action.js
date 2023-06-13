@@ -7,6 +7,7 @@ export const setIsCartOpen = (boolean) =>
 const addCartItem = (cartItems, productToAdd) => {
   // Find if cart contains product to add
   console.log(cartItems);
+  console.log(productToAdd);
   const productToAddInBasket = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
   );
@@ -58,7 +59,7 @@ export const clearItemFromCart = (cartItems, itemToClearFromCart) => {
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
 
-export const removeItemToCart = (cartItems, productToTakeOffOne) => {
+export const removeItemFromCart = (cartItems, productToTakeOffOne) => {
   const newCartItems = removeCartItem(cartItems, productToTakeOffOne);
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
