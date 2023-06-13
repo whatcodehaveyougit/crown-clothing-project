@@ -1,10 +1,19 @@
-import { useEffect } from "react";
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
+import { createAction } from "../utils/reducer/reducer.utils";
+
+// The value I want to access
+export const CartContext = createContext({
+  isCartOpen: false,
+  setIsCartOpen: () => {},
+  cartItems: [],
+  cartCount: 0,
+  cartTotal: 0,
+});
 
 const addCartItem = (cartItems, productToAdd) => {
   // Find if cart contains product to add
   const productToAddInBasket = cartItems.find(
-    (cartItem) => cartItem.id == productToAdd.id
+    (cartItem) => cartItem.id === productToAdd.id
   );
   // If found increment quantity - return a brand new array
   if (productToAddInBasket) {
@@ -41,53 +50,79 @@ const clearCartItem = (cartItems, itemToClearFromCart) => {
   return updatedCartItems;
 };
 
-// The value I want to access
-export const CartContext = createContext({
+export const CART_ACTION_TYPES = {
+  SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
+  SET_CART_ITEMS: "SET_CART_ITEMS",
+};
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: !state.isCartOpen,
+      };
+    case CART_ACTION_TYPES.SET_CART_ITEMS:
+      return {
+        ...state,
+        ...payload,
+      };
+    default:
+      throw new Error(`Unhandled type ${type}`);
+  }
+};
+
+const INITIAL_STATE = {
+  cartTotal: 0,
   isCartOpen: false,
-  setIsCartOpen: () => {},
-  // removeItemToCart: () => {},
-  // addItemToCart: () => {},
   cartItems: [],
   cartCount: 0,
-  cartTotal: 0,
-});
+};
 
-// Not exactly sure what the children does......
 export const CartProvider = ({ children }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
+  // Here we are getting back the state & are destructuring it directly
+  const [{ cartTotal, isCartOpen, cartItems, cartCount }, dispatch] =
+    useReducer(cartReducer, INITIAL_STATE);
 
-  useEffect(() => {
-    const totalQuantity = cartItems.reduce(
+  const setIsCartOpen = (isCartOpen) => {
+    dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isCartOpen));
+  };
+
+  const updateCartItemsReducer = (newCartItems) => {
+    const newCartCount = newCartItems.reduce(
       (accumulator, currentElement) => accumulator + currentElement.quantity,
       0
     );
-    setCartCount(totalQuantity);
-  }, [cartItems]);
-
-  // Single responsability UseEffects() - Good Practice
-  useEffect(() => {
-    const cartTotalPrice = cartItems.reduce(
+    const newCartTotal = newCartItems.reduce(
       (accumulator, currentElement) =>
         accumulator + currentElement.price * currentElement.quantity,
       0
     );
-    setCartTotal(cartTotalPrice);
-  }, [cartItems]);
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
+        cartCount: newCartCount,
+        cartTotal: newCartTotal,
+        cartItems: newCartItems,
+      })
+    );
+  };
 
   // This will be triggered every time the user clicks AddToCart
   const addItemToCart = (productToAdd) => {
-    setCartItems(addCartItem(cartItems, productToAdd));
+    const newCartItems = addCartItem(cartItems, productToAdd);
+    updateCartItemsReducer(newCartItems);
   };
 
   const clearItemFromCart = (itemToClearFromCart) => {
-    setCartItems(clearCartItem(cartItems, itemToClearFromCart));
+    const newCartItems = clearCartItem(cartItems, itemToClearFromCart);
+    updateCartItemsReducer(newCartItems);
   };
 
-  const removeItemToCart = (productToTakeOffOne) => {
-    setCartItems(removeCartItem(cartItems, productToTakeOffOne));
+  const removeItemFromCart = (productToTakeOffOne) => {
+    const newCartItems = removeCartItem(cartItems, productToTakeOffOne);
+    updateCartItemsReducer(newCartItems);
   };
 
   // ============ This is where things are actually added to the context ============= //
@@ -99,7 +134,7 @@ export const CartProvider = ({ children }) => {
     cartItems,
     clearItemFromCart,
     addItemToCart,
-    removeItemToCart,
+    removeItemFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
