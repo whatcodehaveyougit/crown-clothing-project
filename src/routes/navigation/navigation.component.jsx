@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { signOutUser } from "../../utils/firebase/firebase";
@@ -10,15 +10,15 @@ import {
   NavLinks,
   NavLink,
 } from "./navigation.styles.jsx";
-import { CartContext } from "../../contexts/cart.context";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 const Navigation = () => {
-  // Whenever a value inside of this context updates, the functional component is re-rendered
-  const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCartOpen);
 
-  // const currentUser = useSelector((state) => state.user.currentUser);
+  console.log(isCartOpen);
+
   const currentUser = useSelector(selectCurrentUser);
 
   return (
