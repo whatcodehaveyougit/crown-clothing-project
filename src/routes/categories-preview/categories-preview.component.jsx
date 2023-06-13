@@ -25,9 +25,10 @@ const CategoriesPreview = () => {
         catagories &&
           Object.keys(catagories).map((title) => {
             const products = catagories[title];
+            const key = crypto.randomUUID();
             return (
               <CategoryPreview
-                id={title}
+                key={key}
                 title={catagories[title]["title"]}
                 products={products}
               />

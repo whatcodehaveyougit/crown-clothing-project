@@ -3,7 +3,7 @@ import logger from "redux-logger";
 import { rootReducer } from "./root-reducer";
 
 // These are helpers that run before the action hits the reducer
-const middleWares = [logger];
+const middleWares = [];
 
 // This is a chained curry function
 
