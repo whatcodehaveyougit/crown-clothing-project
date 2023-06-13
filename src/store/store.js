@@ -40,7 +40,7 @@ const middleWares = [logger, thunk];
 const persistConfig = {
   key: "root",
   storage,
-  blackList: ["user"],
+  whitelist: ["cart"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
