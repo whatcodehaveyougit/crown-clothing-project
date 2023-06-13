@@ -6,8 +6,6 @@ export const setIsCartOpen = (boolean) =>
 
 const addCartItem = (cartItems, productToAdd) => {
   // Find if cart contains product to add
-  console.log(cartItems);
-  console.log(productToAdd);
   const productToAddInBasket = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
   );
@@ -48,8 +46,6 @@ const clearCartItem = (cartItems, itemToClearFromCart) => {
 
 // This will be triggered every time the user clicks AddToCart
 export const addItemToCart = (cartItems, productToAdd) => {
-  console.log(cartItems);
-  console.log("hello world");
   const newCartItems = addCartItem(cartItems, productToAdd);
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
