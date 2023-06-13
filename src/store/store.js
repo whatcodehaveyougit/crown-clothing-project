@@ -1,6 +1,8 @@
 import { compose, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import { rootReducer } from "./root-reducer";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 // These are helpers that run before the action hits the reducer
 const middleWares = [];
@@ -29,7 +31,21 @@ const middleWares = [];
 
 // const middleWares = [loggerMiddleware];
 
+const persistConfig = {
+  key: "root",
+  storage,
+  blackList: ["user"],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
 // Generating the store object, pretty important stuff!
-export const store = createStore(rootReducer, undefined, composedEnhancers);
+export const store = createStore(
+  persistedReducer,
+  undefined,
+  composedEnhancers
+);
+
+export const persistor = persistStore(store);
