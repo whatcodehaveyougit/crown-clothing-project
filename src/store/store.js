@@ -3,9 +3,15 @@ import logger from "redux-logger";
 import { rootReducer } from "./root-reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import thunk from "redux-thunk";
 
 // These are helpers that run before the action hits the reducer
-const middleWares = [];
+// const middleWares = [
+//   process.env.NODE_ENV !== "production" && logger,
+//   thunk,
+// ].filter(Boolean);
+
+const middleWares = [logger, thunk];
 
 // This is a chained curry function
 
@@ -39,7 +45,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+const composedEnhancers = compose(applyMiddleware(thunk));
 
 // Generating the store object, pretty important stuff!
 export const store = createStore(
