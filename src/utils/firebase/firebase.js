@@ -24,7 +24,7 @@ import { useDebugValue } from "react";
 // Your web app's Firebase configuration
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCdcljlAc5r1gzRHQSrt5Pm_SZfzluMf48",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "crown-clothing-403e6.firebaseapp.com",
   projectId: "crown-clothing-403e6",
   storageBucket: "crown-clothing-403e6.appspot.com",

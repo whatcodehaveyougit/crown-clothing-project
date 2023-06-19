@@ -10,7 +10,6 @@ const Shop = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     // When using an async funcion inside of useEffect, don't make the useEffect async, create a new function inside.
-
     // We have moved out asynchrnous and loading code into a thunk
     dispatch(fetchCategoriesAsync());
   }, []);
