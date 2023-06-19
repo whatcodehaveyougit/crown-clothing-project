@@ -1,7 +1,10 @@
 import { createSelector } from "reselect";
 // Here we transform the data into the final shape we want it to be
+import { CategoryMap } from "./category.types";
 
-const selectCategoryReducer = (state) => state.categories;
+import { CategoriesState } from "./category.reducer";
+
+const selectCategoryReducer = (state): CategoriesState => state.categories;
 
 // createsSelector stops the selectCategories function from re-running every time as that would be expensive
 
@@ -22,10 +25,11 @@ export const selectCategoriesMap = createSelector(
       const { title, items } = category;
       acc[title.toLowerCase()] = items;
       return acc;
-    }, {})
+    }, {} as CategoryMap)
 );
 
 export const selectCategoriesIsLoading = createSelector(
   [selectCategoryReducer],
   (categoriesSlice) => categoriesSlice.isLoading
 );
+
