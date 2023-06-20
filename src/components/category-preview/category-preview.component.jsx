@@ -12,7 +12,7 @@ const CategoryPreview = ({ title, products }) => {
       </h2>
       <div className="preview">
         {/* This filter ensure that only the first 4 items from the array are taken, pretty cool! */}
-        {products.items
+        {products
           .filter((_, idx) => idx < 4)
           .map((product) => (
             <ProductCard key={product.id} product={product} />

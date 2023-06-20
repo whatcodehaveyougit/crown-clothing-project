@@ -22,26 +22,23 @@ const CategoriesPreview = () => {
 
   const catagories = useSelector(selectCategories);
   const isLoading = useSelector(selectCategoriesIsLoading);
+  console.log(catagories);
   return (
     <>
-      {
-        isLoading ? (
-          <Spinner />
-        ) : (
-          Object.keys(catagories).map((title) => {
-            const products = catagories[title];
-            const key = crypto.randomUUID();
-            return (
-              <CategoryPreview
-                key={key}
-                title={catagories[title]["title"]}
-                products={products}
-              />
-            );
-          })
-        )
-        // If you want the map to implicitly return something - use normal brakets instead of squiggley
-      }
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        catagories.map((category) => {
+          const key = crypto.randomUUID();
+          return (
+            <CategoryPreview
+              key={key}
+              title={category["title"]}
+              products={category.items}
+            />
+          );
+        })
+      )}
     </>
   );
 };

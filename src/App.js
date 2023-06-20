@@ -15,8 +15,9 @@ import { useDispatch } from "react-redux";
 const App = () => {
   const dispatch = useDispatch();
 
-  // Centralising control of setting user, best here rather than on sign in/out component
   useEffect(() => {
+    // This function will continously listen for changes and re-run if there is a change
+    // So this code runs on page load, but also on state changes in the Firebase store.
     const unsubscribe = onAuthStateChangedListener(async (user) => {
       if (user) {
         // This in theory creates the document in the Firebas DB (although no working atm)

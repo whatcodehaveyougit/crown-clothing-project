@@ -29,7 +29,7 @@ const firebaseConfig = {
   projectId: "crown-clothing-403e6",
   storageBucket: "crown-clothing-403e6.appspot.com",
   messagingSenderId: "949498107088",
-  appId: "1:949498107088:web:956712b00970164524fad5",
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
@@ -58,7 +58,6 @@ export const addCollectionAndDocuments = async (
   const collectionRef = collection(db, collectionKey);
   // We write multiple different documents (which are objects at the start) into a collection
   const batch = writeBatch(db);
-  // console.log( objectsToAdd );
 
   objectsToAdd.forEach((object) => {
     // The collectionRef tells the docRef which DB we are using

@@ -4,7 +4,6 @@ import "./sign-in.styles.scss";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase";
 
@@ -68,7 +67,6 @@ const SignIn = () => {
           name="email"
           value={email}
         />
-
         <FormInput
           label="Password"
           type="password"
@@ -84,7 +82,7 @@ const SignIn = () => {
             type="button" // This stops the form from submitting when we press the button
             onClick={signInWithGoogle}
           >
-            Google Popup SignIn
+            Google Popup
           </Button>
         </div>
       </form>
