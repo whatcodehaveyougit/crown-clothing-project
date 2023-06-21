@@ -22,7 +22,6 @@ const CategoriesPreview = () => {
 
   const catagories = useSelector(selectCategories);
   const isLoading = useSelector(selectCategoriesIsLoading);
-  console.log(catagories);
   return (
     <>
       {isLoading ? (

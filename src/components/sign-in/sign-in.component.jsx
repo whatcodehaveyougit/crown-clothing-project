@@ -29,7 +29,6 @@ const SignIn = () => {
         email,
         password
       );
-      // currentUser is set in UserContext, see UserContext for how
       resetFormFields();
     } catch (error) {
       switch (error.code) {

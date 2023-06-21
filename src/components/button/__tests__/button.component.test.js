@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import Button, { BUTTON_TYPE_CLASSES } from "../button.component";
 
 describe("button tests", () => {
