@@ -1,8 +1,8 @@
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 import { useSelector } from "react-redux";
-import { selectCategories } from "../../store/categories/category.selector.js";
+import { selectCategories } from "../../store/categories/category.selector.ts";
 import Spinner from "../../components/spinner/spinner.component";
-import { selectCategoriesIsLoading } from "../../store/categories/category.selector.js";
+import { selectCategoriesIsLoading } from "../../store/categories/category.selector.ts";
 
 const CategoriesPreview = () => {
   // UseSelector is a hook that you pass a selector function

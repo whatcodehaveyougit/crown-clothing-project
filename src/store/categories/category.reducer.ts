@@ -4,7 +4,7 @@ import {
   fetchCategoriesStart,
   fetchCategoriesSuccess,
   fetchCategoriesFailed,
-} from "./category.action";
+} from "./category.action.ts";
 
 export type CategoriesState = {
   readonly categories: Category[];

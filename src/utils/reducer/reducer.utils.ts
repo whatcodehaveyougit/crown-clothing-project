@@ -1,11 +1,12 @@
 import { AnyAction } from "redux";
+// import { fetchCategoriesStart } from '../../store/categories/category.action.ts'
 
 type Matchable<AC extends () => AnyAction> = AC & {
   type: ReturnType<AC>["type"];
   match(action: AnyAction): action is ReturnType<AC>;
 };
 
-withMatcher(fetchCategoriesStart);
+// withMatcher(fetchCategoriesStart);
 
 export function withMatcher<AC extends () => AnyAction & { type: string }>(
   actionCreator: AC

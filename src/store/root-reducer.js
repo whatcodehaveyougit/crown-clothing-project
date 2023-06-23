@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { userReducer } from "./user/user.reducer";
-import { categoriesReducer } from "./categories/category.reducer";
+import { categoriesReducer } from "./categories/category.reducer.ts";
 import { cartReducer } from "./cart/cart.reducer";
 
 // Whenever RootReducer updates a value, the entire root store object will be a new store object
