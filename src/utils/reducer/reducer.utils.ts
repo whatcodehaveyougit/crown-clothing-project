@@ -1,5 +1,9 @@
 import { AnyAction } from "redux";
+
 // import { fetchCategoriesStart } from '../../store/categories/category.action.ts'
+
+// This is a type predicate, it is a function that verifies a specific type it receives
+// is going to be a narrower type or not
 
 type Matchable<AC extends () => AnyAction> = AC & {
   type: ReturnType<AC>["type"];

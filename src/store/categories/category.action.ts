@@ -5,7 +5,11 @@ import {
   ActionWithPayload,
   withMatcher,
 } from "../../utils/reducer/reducer.utils.ts";
-import { CATEGORIES_ACTION_TYPES, Category } from "./category.types.ts";
+import {
+  CATEGORIES_ACTION_TYPES,
+  Category,
+  CategoryItem,
+} from "./category.types.ts";
 
 export type FetchCategoriesStart =
   Action<CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START>;
@@ -15,7 +19,7 @@ export type FetchCategoriesSuccess = ActionWithPayload<
   Category[]
 >;
 
-export const setCategories = (categoriesArray) =>
+export const setCategories = (categoriesArray: CategoryItem[]) =>
   createAction(CATEGORIES_ACTION_TYPES.SET_CATEGORIES, categoriesArray);
 // the create action takes in the type & payload and returns an object of the
 // type and payload.  Very simple.  Just means we don't have to retype this all the time.

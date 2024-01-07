@@ -4,6 +4,7 @@ import {
   fetchCategoriesStart,
   fetchCategoriesSuccess,
   fetchCategoriesFailed,
+  CategoryAction,
 } from "./category.action.ts";
 
 export type CategoriesState = {
@@ -23,7 +24,7 @@ export const CATEGORIES_INITIAL_STATE: CategoriesState = {
 
 export const categoriesReducer = (
   state = CATEGORIES_INITIAL_STATE,
-  action = {} as AnyAction
+  action = {} as CategoryAction
 ) => {
   if (fetchCategoriesStart.match(action)) {
     return { ...state, isLoading: true };
