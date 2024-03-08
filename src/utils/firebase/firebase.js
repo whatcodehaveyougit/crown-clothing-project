@@ -33,7 +33,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 //  GoogleAuthProvider is a class we get from firebase.
 const googleProvider = new GoogleAuthProvider();

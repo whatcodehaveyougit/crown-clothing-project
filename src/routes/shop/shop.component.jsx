@@ -21,7 +21,7 @@ const Shop = () => {
     };
     getCategoriesMap();
     // and then call the async function!
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>

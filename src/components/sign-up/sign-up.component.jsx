@@ -33,7 +33,7 @@ const SignUp = () => {
       // setCurrentUser( user );
       resetFormFields();
     } catch (error) {
-      if (error.code == "auth/email-already-in-use") {
+      if (error.code === "auth/email-already-in-use") {
         alert("User already exists");
       }
       console.log("error in creating user" + error);
