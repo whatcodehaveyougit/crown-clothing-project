@@ -37,7 +37,7 @@ const clearCartItem = (cartItems, itemToClearFromCart) => {
   // NB: This removes the item COMPLETELY from the cart
   let updatedCartItems = [];
   cartItems.forEach((cartItem) => {
-    if (cartItem.id != itemToClearFromCart.id) {
+    if (cartItem.id !== itemToClearFromCart.id) {
       updatedCartItems.push(cartItem);
     }
   });

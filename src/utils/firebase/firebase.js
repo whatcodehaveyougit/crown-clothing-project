@@ -19,7 +19,7 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
-import { useDebugValue } from "react";
+// import { useDebugValue } from "react";
 
 // Your web app's Firebase configuration
 
@@ -33,7 +33,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
 
 //  GoogleAuthProvider is a class we get from firebase.
 const googleProvider = new GoogleAuthProvider();
