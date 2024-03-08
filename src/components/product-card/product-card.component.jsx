@@ -10,6 +10,11 @@ const ProductCard = ({ product }) => {
   // This is not plugging in properly.
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
+
+  // Interesting as it runs this dispatch
+  // However addItemsToCart is just a function which
+  // Calls another function to run the logic
+  // Then with the result of the that runs the action which will interact with the store
   const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
 
   return (

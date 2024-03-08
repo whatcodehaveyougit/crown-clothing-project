@@ -3,13 +3,17 @@ import { createSelector } from "reselect";
 
 const selectCategoryReducer = (state) => state.categories;
 
-// createsSelector stops the selectCategories function from re-running every time as that would be expensive
+// createsSelector stops the selectCategories function from re-running every time
+// As that would be expensive
 
 // THis is a memoized selector
+// These are pure functions which means..
+// If the input does not change then the output will not have changed either
 export const selectCategories = createSelector(
-  [selectCategoryReducer], // if categoriesSlice which we get back from selectCategoryReducer is different.  Then it is re-run
-  // So basically if state.categories is different
+  [selectCategoryReducer],
   (categoriesSlice) => categoriesSlice.categories
+  // if categoriesSlice (what we get back from selectCategoryReducer) is different.  Then it is re-run
+  // So basically if state.categories is different
 );
 // if it is the same then the previously cached value will still be valid
 

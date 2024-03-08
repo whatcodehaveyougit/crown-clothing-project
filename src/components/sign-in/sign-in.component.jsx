@@ -79,13 +79,13 @@ const SignIn = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign in</Button>
-          <Button
+          {/* <Button
             buttonType={BUTTON_TYPE_CLASSES.google}
             type="button" // This stops the form from submitting when we press the button
             onClick={signInWithGoogle}
           >
             Google Popup SignIn
-          </Button>
+          </Button> */}
         </div>
       </form>
     </div>
